@@ -163,6 +163,4 @@ cython_debug/
 .DS_Store
 
 # data files
-data/combined/
-data/train
-data/test
+data/
