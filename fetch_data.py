@@ -4,11 +4,15 @@ import numpy as np
 
 
 CACHE_FOLDER = '.cache'
-SEASONS = [2018, 2019, 2020]
-# SEASONS = [2021]
 SESSION = 'R'
-TYPE = 'train'
+
+SEASONS = [2018, 2019, 2020, 2021]
+# TYPE = 'train'
 # TYPE = 'test'
+TYPE = 'new'
+
+# ROUNDS = range(1, 25)
+ROUNDS = ['british', 'austrian', 'brazilian']
 
 fastf1.Cache.enable_cache(CACHE_FOLDER)
 
@@ -17,7 +21,7 @@ headers = ['race_id', 'circuit_id', 'year', 'round', 'race_length', 'driver_id',
 
 def fetch_preprocess_data():
     for year in SEASONS:
-        for round in range(1, 25):
+        for round in ROUNDS:
             try:
                 dataFrame = pd.DataFrame(columns=headers)
                 session_data = fastf1.get_session(year, round, SESSION)
