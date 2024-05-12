@@ -161,3 +161,8 @@ cython_debug/
 
 # mac files
 .DS_Store
+
+# data files
+data/combined/
+data/train
+data/test
