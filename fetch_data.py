@@ -40,6 +40,7 @@ def fetch_preprocess_data():
                         rating = results[results['DriverNumber'] == driver_id]['Points'].values[-1]
                         previous_lap_time = 0
                         starting_position = laps_driver_data['Position'].iloc[0]
+                        pit_in_time = laps_driver_data['PitInTime'].iloc[0].total_seconds()
                         for idx, row in laps_driver_data.iterrows():
                             df_row = []
                             df_row.append(race_id)      # race_id
@@ -53,11 +54,12 @@ def fetch_preprocess_data():
                             df_row.append(previous_lap_time)    # milliseconds
                             previous_lap_time = row['LapTime'].total_seconds() * 1000
                             df_row.append(pit_stop_count)   # pit_stop_count
-                            pit_stop_milliseconds = 0
-                            if not pd.isnull((row['PitOutTime'].total_seconds() - row['PitInTime'].total_seconds())*1000):
-                                pit_stop_milliseconds = (row['PitOutTime'].total_seconds() - row['PitInTime'].total_seconds())*1000
-                            df_row.append(pit_stop_milliseconds)    # pit_stop_milliseconds
-                            df_row.append(0 if pd.isnull(row['PitInTime']) else 1)  # pit_stop
+                            if pd.isnull(row['PitOutTime'].total_seconds()):
+                                df_row.append(0)
+                            else:
+                                df_row.append((row['PitOutTime'].total_seconds() - pit_in_time)*1000)
+                            pit_in_time = row['PitInTime'].total_seconds()
+                            df_row.append(0 if pd.isnull(row['PitOutTime']) else 1)  # pit_stop
                             df_row.append(rating)
                             fcy = 0
                             if row['TrackStatus'] == 1:
