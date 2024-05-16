@@ -1,22 +1,43 @@
 import fastf1
 import pandas as pd
-import numpy as np
 
 
-CACHE_FOLDER = '.cache'
-SESSION = 'R'
+CACHE_FOLDER = '.cache'     # cache folder
+SESSION = 'R'   # grand prix (racing session)
 
 SEASONS = [2018, 2019, 2020, 2021]
-# TYPE = 'train'
-# TYPE = 'test'
 TYPE = 'new'
 
 # ROUNDS = range(1, 25)
-ROUNDS = ['british', 'austrian', 'brazilian']
+ROUNDS = ['british', 'austrian', 'brazilian', 'italian', 'abudhabi']        # grand prix names
 
 fastf1.Cache.enable_cache(CACHE_FOLDER)
 
-headers = ['race_id', 'circuit_id', 'year', 'round', 'race_length', 'driver_id', 'lap', 'position', 'milliseconds', 'pit_stop_count', 'pit_stop_milliseconds', 'pit_stop', 'rating', 'fcy', 'battle', 'next_lap_time', 'fitted_tire', 'tire_age', 'starting_position', 'gap_from_the_car_in_front', 'gap_from_the_following_car', 'lap_time_of_the_car_in_front', 'lap_time_of_the_following_car', 'drs']
+headers = ['race_id', 
+           'circuit_id', 
+           'year', 
+           'round', 
+           'race_length', 
+           'driver_id', 
+           'lap', 
+           'position', 
+           'milliseconds', 
+           'pit_stop_count', 
+           'pit_stop_milliseconds', 
+           'pit_stop', 
+           'rating', 
+           'fcy',   # track status
+           'battle', 
+           'next_lap_time', 
+           'fitted_tire', 
+           'tire_age', 
+           'starting_position', 
+           'gap_from_the_car_in_front', 
+           'gap_from_the_following_car', 
+           'lap_time_of_the_car_in_front', 
+           'lap_time_of_the_following_car', 
+           'drs',
+           ]
 
 
 def fetch_preprocess_data():
